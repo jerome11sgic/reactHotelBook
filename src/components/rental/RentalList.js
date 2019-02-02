@@ -1,23 +1,7 @@
 import React from 'react';
 import { RentalCard } from './RentalCard';
 import { connect } from 'react-redux';
-
-// Attempt 1
-// export class RentalList extends React.Component {
-//     render() {
-//         return (
-//             <section id="rentalListing">
-//                 <h1 className="page-title">Your Home All Around the World</h1>
-//                 <div className="row">
-//                     <RentalCard />
-//                     <RentalCard />
-//                     <RentalCard />
-//                     <RentalCard />
-//                 </div>
-//             </section>
-//         );
-//     }
-// }
+import * as actions from '../../actions';
 
 export class RentalList extends React.Component {
  
@@ -29,6 +13,10 @@ export class RentalList extends React.Component {
                 <RentalCard key={index} rental={rental}/>
             )
         });
+    }
+
+    componentWillMount(){
+        this.props.dispatch(actions.fetchRentals())
     }
 
     render() {
@@ -49,7 +37,7 @@ function mapStateToProps(state){
   
     return{
         
-        rentals:state.rentals
+        rentals:state.rentals.data
     }
 }
 
